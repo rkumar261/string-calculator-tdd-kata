@@ -47,4 +47,10 @@ public class StringCalculatorTest {
     public void testNewLineAndComma() {
         assertEquals(14, StringCalculator.add("3\n4,7"));
     }
+
+    @Test 
+    @DisplayName("Test Custome Delimeter")
+    public void testCustomDelimiter() {
+        assertEquals(3, StringCalculator.add("//;\n1;2"));
+    }
 }
