@@ -24,7 +24,6 @@ public class StringCalculatorTest {
         assertEquals(4, StringCalculator.add("4"));
     }
 
-    
     @Test 
     @DisplayName("Test Two number")
     public void testAddWithTwoNumber() {
@@ -35,5 +34,17 @@ public class StringCalculatorTest {
     @DisplayName("Test Multile Numbers")
     public void testAddMultipleNumber() {
         assertEquals(17, StringCalculator.add("4,3,6,4"));
+    }
+
+    @Test
+    @DisplayName("Test New Line")
+    public void testNewLineAsValidDelimiter() {
+        assertEquals(10, StringCalculator.add("4\n2\n4"));
+    }
+
+    @Test
+    @DisplayName("Test New Line And Comma")
+    public void testNewLineAndComma() {
+        assertEquals(14, StringCalculator.add("3\n4,7"));
     }
 }
