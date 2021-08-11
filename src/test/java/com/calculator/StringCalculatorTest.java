@@ -23,4 +23,16 @@ public class StringCalculatorTest {
         assertEquals(1, StringCalculator.add("1"));
         assertEquals(4, StringCalculator.add("4"));
     }
+
+    @Test 
+    @DisplayName("Test Two number")
+    public void testAddWithTwoNumber() {
+        assertEquals(3, StringCalculator.add("1,2"));
+    }
+
+    @Test
+    @DisplayName("Test Multile Numbers")
+    public void testAddMultipleNumber() {
+        assertEquals(17, StringCalculator.add("4,3,6,4"));
+    }
 }
