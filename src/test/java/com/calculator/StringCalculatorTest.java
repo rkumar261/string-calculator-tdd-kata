@@ -88,4 +88,11 @@ public class StringCalculatorTest {
     public void ignoreNumGrtThn1000() {
         assertEquals(4, StringCalculator.add("1002,4"));
     }
+    
+    @Test 
+    @DisplayName("Test delimiter of arbitrary length")
+    public void testDelimiterOfArbitraryLength() {
+        assertEquals(6, StringCalculator.add("//[***]\n1***2***3"));
+    }
+
 }

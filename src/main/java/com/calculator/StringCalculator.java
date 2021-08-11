@@ -1,22 +1,24 @@
 package com.calculator;
 
-import java.util.Arrays;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-
-
 public class StringCalculator {
 
-    public static int count = 0;
-    private String delimiter;
-    private String numbers;
+	public static int count = 0;
+	private String delimiter;
+	private String numbers;
+    
+    public StringCalculator() {
 
-    private StringCalculator(String delimiter, String numbers) {
-        this.delimiter = delimiter;
-        this.numbers = numbers;
-    }
+	}
+    
+	private StringCalculator(String delimiter, String numbers) {
+		this.delimiter = delimiter;
+		this.numbers = numbers;
+	}
 
 	private IntStream getNumbers() {
 		if (numbers.isEmpty()) {
@@ -37,35 +39,39 @@ public class StringCalculator {
 		}
 	}
 
-    private int sum() {
-        synchronized(this) {
+	private int sum() {
+		synchronized(this) {
 			count++;
 		}
+		
+		ensureNoNegativeNumbers();
+		return getNumbers().sum();
+	}
 
-        ensureNoNegativeNumbers();
-        return getNumbers().sum();
-    }
+    private static String parseDelimiter(String header) {
+		String delimiter = header.substring(2);
+		if (delimiter.startsWith("[")) {
+			delimiter = delimiter.substring(1, delimiter.length() - 1);
+		}
 
-    private static StringCalculator parseInput(String input) {
-        if(input.startsWith("//")) {
-            //input string will be divied into two parts
-            String[] parts = input.split("\n", 2);
-            return new StringCalculator(parts[0].substring(2), parts[1]);
-        } else {
-            return new StringCalculator(",|\n", input);
-        }
-    }
+        return Pattern.quote(delimiter);
+	}
 
-    public static int add(String input) {
-        if(input.isEmpty()) {
-            return 0;
-        } 
+	private static StringCalculator parseInput(String input) {
+		if (input.startsWith("//")) {
+			String[] headerAndNumbers = input.split("\n", 2);
+			String delimiter = parseDelimiter(headerAndNumbers[0]);
+			return new StringCalculator(delimiter, headerAndNumbers[1]);
+		} else {
+			return new StringCalculator(",|\n", input);
+		}
+	}
+    
+	public static int add(String input) {
+		return parseInput(input).sum();
+	}
 
-        StringCalculator calculator = parseInput(input);
-        return calculator.sum();
-    }
-
-    public static int getCalledCount() {
+	public static int getCalledCount() {
 		return count;
 	}
-} 
+}
