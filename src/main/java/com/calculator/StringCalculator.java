@@ -18,13 +18,15 @@ public class StringCalculator {
         this.numbers = numbers;
     }
 
-    private IntStream getNumbers() {
-        if(numbers.isEmpty()) {
-            return IntStream.empty();
-        } else {
-            return Stream.of(numbers.split(delimiter)).mapToInt(Integer::parseInt);
-        }
-    }
+	private IntStream getNumbers() {
+		if (numbers.isEmpty()) {
+			return IntStream.empty();
+		} else {
+			return Stream.of(numbers.split(delimiter))
+                    .mapToInt(Integer::parseInt)
+					.filter(n -> n <= 1000);
+		}
+	}
 
 	private void ensureNoNegativeNumbers() {
 		String negativeNumbers = getNumbers().filter(n -> n < 0)
@@ -39,7 +41,7 @@ public class StringCalculator {
         synchronized(this) {
 			count++;
 		}
-        
+
         ensureNoNegativeNumbers();
         return getNumbers().sum();
     }

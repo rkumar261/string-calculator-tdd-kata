@@ -82,4 +82,10 @@ public class StringCalculatorTest {
     public void validateCallCount() {
         assertEquals(StringCalculator.getCalledCount(), StringCalculator.count);
     }
+
+    @Test 
+    @DisplayName("Test Number greater than 1000")
+    public void ignoreNumGrtThn1000() {
+        assertEquals(4, StringCalculator.add("1002,4"));
+    }
 }
