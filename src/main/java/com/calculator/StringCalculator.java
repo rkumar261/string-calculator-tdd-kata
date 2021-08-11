@@ -9,6 +9,7 @@ import java.util.stream.Stream;
 
 public class StringCalculator {
 
+    public static int count = 0;
     private String delimiter;
     private String numbers;
 
@@ -35,6 +36,10 @@ public class StringCalculator {
 	}
 
     private int sum() {
+        synchronized(this) {
+			count++;
+		}
+        
         ensureNoNegativeNumbers();
         return getNumbers().sum();
     }
@@ -57,4 +62,8 @@ public class StringCalculator {
         StringCalculator calculator = parseInput(input);
         return calculator.sum();
     }
+
+    public static int getCalledCount() {
+		return count;
+	}
 } 

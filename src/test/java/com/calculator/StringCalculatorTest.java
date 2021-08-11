@@ -76,4 +76,10 @@ public class StringCalculatorTest {
             assertEquals(e.getMessage(), "Negative not allowed: -3,-5,-13");
         }
     }
+
+    @Test
+    @DisplayName("Count number of times add was invoked")
+    public void validateCallCount() {
+        assertEquals(StringCalculator.getCalledCount(), StringCalculator.count);
+    }
 }
