@@ -53,4 +53,27 @@ public class StringCalculatorTest {
     public void testCustomDelimiter() {
         assertEquals(3, StringCalculator.add("//;\n1;2"));
     }
+
+    @Test 
+    @DisplayName("Test Negative Number")
+    public void testNegativeNumber() {
+        try {
+            StringCalculator.add("-9");
+            fail("Exception expected.");
+            
+        } catch (IllegalArgumentException e) {
+            assertEquals(e.getMessage(), "Negative not allowed: -9");
+        }
+    }
+
+    @Test 
+    @DisplayName("Test multiple Negative Number")
+    public void testMultipleNegativeNumber() {
+        try {
+            StringCalculator.add("1,-3,5,-5,-13");
+            fail("Exception expected.");
+        } catch (IllegalArgumentException e) {
+            assertEquals(e.getMessage(), "Negative not allowed: -3,-5,-13");
+        }
+    }
 }
