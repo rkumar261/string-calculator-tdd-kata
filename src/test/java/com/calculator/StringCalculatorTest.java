@@ -95,4 +95,17 @@ public class StringCalculatorTest {
         assertEquals(6, StringCalculator.add("//[***]\n1***2***3"));
     }
 
+    @Test 
+    @DisplayName("Test Multiple delimiter")
+    public void testMultipleDelimiter() {
+        assertEquals(6, StringCalculator.add("//[*][%]\n1*2%3"));
+    }
+
+    @Test 
+    @DisplayName("Test Multiple Custom delimiter")
+    public void testMultipleCustomDelimiter() {
+        assertEquals(10, StringCalculator.add("//[***][%%%][;;]\n1***2%%%3;;4"));
+        assertEquals(6, StringCalculator.add("//[[][]]\n1[2]3"));
+    }
+
 }
