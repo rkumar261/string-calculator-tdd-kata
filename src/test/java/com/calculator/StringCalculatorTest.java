@@ -24,6 +24,7 @@ public class StringCalculatorTest {
         assertEquals(4, StringCalculator.add("4"));
     }
 
+    
     @Test 
     @DisplayName("Test Two number")
     public void testAddWithTwoNumber() {
